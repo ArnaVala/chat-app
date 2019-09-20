@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import './index.css';
+import registerServiceWorker from './registerServiceWorker';
 import App from './components/App';
 import SignIn from './components/Auth/SignIn';
 import SignUp from './components/Auth/SignUp';
 
-import registerServiceWorker from './registerServiceWorker';
+import 'semantic-ui-css/semantic.min.css';
 
 const Root = () => (
   <Router>
