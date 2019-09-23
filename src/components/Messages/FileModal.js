@@ -21,9 +21,7 @@ class FileModal extends React.Component {
 
     if (file !== null) {
       if (this.isAuthorized(file.name)) {
-        const metadata = {
-          contentType: mime.lookup(file.name)
-        };
+        const metadata = { contentType: mime.lookup(file.name) };
         uploadFile(file, metadata);
         closeModal();
         this.clearFile();
@@ -46,19 +44,17 @@ class FileModal extends React.Component {
           <Input
             onChange={this.addFile}
             fluid
-            label='File'
+            label='File types: jpg, png'
             name='file'
             type='file'
           />
         </Modal.Content>
         <Modal.Actions>
           <Button onClick={this.sendFile} color='green' inverted>
-            <Icon name='checkmark' />
-            Send
+            <Icon name='checkmark' /> Send
           </Button>
           <Button color='red' inverted onClick={closeModal}>
-            <Icon name='remove' />
-            Cancel
+            <Icon name='remove' /> Cancel
           </Button>
         </Modal.Actions>
       </Modal>

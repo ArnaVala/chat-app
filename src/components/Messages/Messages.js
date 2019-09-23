@@ -1,24 +1,24 @@
-import React from 'react';
-import firebase from '../../firebase';
-import { Segment, Comment } from 'semantic-ui-react';
+import React from "react";
+import { Segment, Comment } from "semantic-ui-react";
+import firebase from "../../firebase";
 
-import MessagesHeader from './MessagesHeader';
-import MessageForm from './MessageForm';
-import Message from './Message';
+import MessagesHeader from "./MessagesHeader";
+import MessageForm from "./MessageForm";
+import Message from "./Message";
 
 class Messages extends React.Component {
   state = {
-    messagesRef: firebase.database().ref('messages'),
+    privateChannel: this.props.isPrivateChannel,
+    privateMessagesRef: firebase.database().ref("privateMessages"),
+    messagesRef: firebase.database().ref("messages"),
     messages: [],
     messagesLoading: true,
     channel: this.props.currentChannel,
     user: this.props.currentUser,
-    numUniqueUsers: '',
-    searchTerm: '',
+    numUniqueUsers: "",
+    searchTerm: "",
     searchLoading: false,
-    searchResults: '',
-    privateChannel: 'this.props.isPrivateChannel',
-    privateMessagesRef: firebase.database().ref('privateMessages')
+    searchResults: []
   };
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class Messages extends React.Component {
   addMessageListener = channelId => {
     let loadedMessages = [];
     const ref = this.getMessagesRef();
-    ref.child(channelId).on('child_added', snap => {
+    ref.child(channelId).on("child_added", snap => {
       loadedMessages.push(snap.val());
       this.setState({
         messages: loadedMessages,
@@ -63,7 +63,7 @@ class Messages extends React.Component {
 
   handleSearchMessages = () => {
     const channelMessages = [...this.state.messages];
-    const regex = new RegExp(this.state.searchTerm, 'gi');
+    const regex = new RegExp(this.state.searchTerm, "gi");
     const searchResults = channelMessages.reduce((acc, message) => {
       if (
         (message.content && message.content.match(regex)) ||
@@ -73,7 +73,6 @@ class Messages extends React.Component {
       }
       return acc;
     }, []);
-
     this.setState({ searchResults });
     setTimeout(() => this.setState({ searchLoading: false }), 1000);
   };
@@ -86,7 +85,7 @@ class Messages extends React.Component {
       return acc;
     }, []);
     const plural = uniqueUsers.length > 1 || uniqueUsers.length === 0;
-    const numUniqueUsers = `${uniqueUsers.length} user${plural ? 's' : ''}`;
+    const numUniqueUsers = `${uniqueUsers.length} user${plural ? "s" : ""}`;
     this.setState({ numUniqueUsers });
   };
 
@@ -102,22 +101,13 @@ class Messages extends React.Component {
 
   displayChannelName = channel => {
     return channel
-      ? `${this.state.privateChannel ? '@' : '#'}${channel.name}`
-      : '';
+      ? `${this.state.privateChannel ? "@" : "#"}${channel.name}`
+      : "";
   };
 
   render() {
-    const {
-      messagesRef,
-      messages,
-      channel,
-      user,
-      numUniqueUsers,
-      searchTerm,
-      searchResults,
-      searchLoading,
-      privateChannel
-    } = this.state;
+    // prettier-ignore
+    const { messagesRef, messages, channel, user, numUniqueUsers, searchTerm, searchResults, searchLoading, privateChannel } = this.state;
 
     return (
       <React.Fragment>
@@ -130,7 +120,7 @@ class Messages extends React.Component {
         />
 
         <Segment>
-          <Comment.Group className={'messages'}>
+          <Comment.Group className="messages">
             {searchTerm
               ? this.displayMessages(searchResults)
               : this.displayMessages(messages)}

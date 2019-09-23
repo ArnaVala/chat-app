@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import firebase from '../../firebase';
 import md5 from 'md5';
 import {
@@ -11,6 +10,7 @@ import {
   Message,
   Icon
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 class SignUp extends React.Component {
   state = {
@@ -28,7 +28,6 @@ class SignUp extends React.Component {
     let error;
 
     if (this.isFormEmpty(this.state)) {
-      //throw error
       error = { message: 'Fill in all fields' };
       this.setState({ errors: errors.concat(error) });
       return false;
@@ -37,7 +36,6 @@ class SignUp extends React.Component {
       this.setState({ errors: errors.concat(error) });
       return false;
     } else {
-      //form valid
       return true;
     }
   };
@@ -135,7 +133,7 @@ class SignUp extends React.Component {
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as='h1' icon color='orange' textAlign='center'>
             <Icon name='puzzle piece' color='orange' />
-            Sign Up for DevChat
+            SignUp for DevChat
           </Header>
           <Form onSubmit={this.handleSubmit} size='large'>
             <Segment stacked>
@@ -149,6 +147,7 @@ class SignUp extends React.Component {
                 value={username}
                 type='text'
               />
+
               <Form.Input
                 fluid
                 name='email'
@@ -160,6 +159,7 @@ class SignUp extends React.Component {
                 className={this.handleInputError(errors, 'email')}
                 type='email'
               />
+
               <Form.Input
                 fluid
                 name='password'
@@ -171,6 +171,7 @@ class SignUp extends React.Component {
                 className={this.handleInputError(errors, 'password')}
                 type='password'
               />
+
               <Form.Input
                 fluid
                 name='passwordConfirmation'
@@ -201,7 +202,7 @@ class SignUp extends React.Component {
             </Message>
           )}
           <Message>
-            Already a user? <Link to='/signin'>Sign In</Link>
+            Already a user? <Link to='/signin'>signin</Link>
           </Message>
         </Grid.Column>
       </Grid>

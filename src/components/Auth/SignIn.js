@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import firebase from '../../firebase';
-
 import {
   Grid,
   Form,
@@ -11,6 +9,7 @@ import {
   Message,
   Icon
 } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 class SignIn extends React.Component {
   state = {
@@ -63,7 +62,7 @@ class SignIn extends React.Component {
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as='h1' icon color='violet' textAlign='center'>
             <Icon name='code branch' color='violet' />
-            Sign in to DevChat
+            Login to DevChat
           </Header>
           <Form onSubmit={this.handleSubmit} size='large'>
             <Segment stacked>
@@ -78,6 +77,7 @@ class SignIn extends React.Component {
                 className={this.handleInputError(errors, 'email')}
                 type='email'
               />
+
               <Form.Input
                 fluid
                 name='password'
@@ -108,7 +108,7 @@ class SignIn extends React.Component {
             </Message>
           )}
           <Message>
-            Don't have an account? <Link to='/signup'>Sign Up</Link>
+            Don't have an account? <Link to='/register'>Register</Link>
           </Message>
         </Grid.Column>
       </Grid>
