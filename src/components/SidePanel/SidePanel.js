@@ -8,7 +8,7 @@ import Starred from './Starred';
 
 class SidePanel extends React.Component {
   render() {
-    const { currentUser, primaryColor, secondaryColor } = this.props;
+    const { currentUser, primaryColor } = this.props;
 
     return (
       <Menu
